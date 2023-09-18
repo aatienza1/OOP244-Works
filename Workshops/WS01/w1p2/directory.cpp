@@ -13,6 +13,6 @@
 #include "Phone.h"
 using namespace sdds;
 int main() {
-   phoneDir("Star Wars", "phones.txt");
+    phoneDir("Star Wars", "badfile.txt");
    return 0;
 }
