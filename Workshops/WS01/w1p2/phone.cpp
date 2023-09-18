@@ -18,6 +18,28 @@ using namespace std;
 
 namespace sdds {
 	void phoneDir(const char* programTitle, const char* fileName) {
+
+		//Checking for file
+		phoneTitle(programTitle);
+		FILE* fptr = fopen(fileName, "r");
+		runPhoneDirectory(programTitle, fileName);
+		fclose(fptr);
+	}
+	void phoneTitle(const char* programTitle) {
+		//	When running, after showing the title, the program should prompt for a partial name entry.
+		cout << programTitle << " phone direcotry search" << endl; cout
+			<< "-------------------------------------------------------" << endl;
+
+	}
+
+	void brokenPhone(const char* fileName) {
+		cout << fileName << " file not found!" << endl;
+
+		cout << "Thank you for using Broken Phone Book directory." << endl;
+
+	}
+
+	void phoneSearch(const char* programTitle, std::FILE* fptr) {
 		char partialName[50];
 
 		// Arrays for the area code formatting
@@ -30,70 +52,59 @@ namespace sdds {
 		// Comparison Arrays
 		char lowerCaseFullName[50];
 		char lowerCasePartialName[50];
-		
-		//Checking for file
-		FILE* fptr = fopen(fileName, "r");
-		if (fptr) {
+		// Do loop to keep partial name entries until exit is entered
+		do {
 
-			//	When running, after showing the title, the program should prompt for a partial name entry.
-			cout << programTitle << " phone direcotry search" << endl; cout
-				<< "-------------------------------------------------------" << endl;
+			cout << "Enter a partial name to search (no spaces) or enter '!' to exit" << endl;
+			cout << "> ";
+			cin >> partialName;
 
-			// Do loop to keep partial name entries until exit is entered
-			do {
-				cout << "Enter a partial name to search (no spaces) or enter '!' to exit" << endl;
-				cout << "> ";
-				cin >> partialName;
+			// Rewind the file because after typing input it would not display anything
+			rewind(fptr);
 
-				// Rewind the file because after typing input it would not display anything
-				rewind(fptr);
-				
-				//	After receiving the partial name the program should search through the names 
-				// in the file and if a name is found containing the partial entry, the matching phone record is displayed
-				
-				//This format was taken from the assignment hint, number of fields it needs to find is 4
-				while (fscanf(fptr, "%[^\t]\t%s\t%s\t%s\n", name, areaCode, prefix, number) == 4) {
+			//	After receiving the partial name the program should search through the names 
+			// in the file and if a name is found containing the partial entry, the matching phone record is displayed
 
-					// Copying field 1 into the full name
-					strCpy(fullName, name);
+					//This format was taken from the assignment hint, number of fields it needs to find is 4
+			while (fscanf(fptr, "%[^\t]\t%s\t%s\t%s\n", name, areaCode, prefix, number) == 4) {
 
-					// Removing white space from full name
-					trim(fullName);
+				//Preparing the names
+				// Copying field 1 into the full name
+				strCpy(fullName, name);
 
-					// Converting both partialNAme and the fullName into lower case in preparation for strStr
-					toLowerCaseAndCopy(lowerCaseFullName, fullName);
-					toLowerCaseAndCopy(lowerCasePartialName, partialName);
+				// Removing white space from full name
+				trim(fullName);
 
-					// Comparing the partial results with strSTr
-					const char* result = strStr(lowerCaseFullName, lowerCasePartialName);
+				// Converting both partialNAme and the fullName into lower case in preparation for strStr
+				toLowerCaseAndCopy(lowerCaseFullName, fullName);
+				toLowerCaseAndCopy(lowerCasePartialName, partialName);
 
-					// If the results are true, then print out the fields above
-					//	Nothing is displayed if no match is found.
-					if (result) {
-						cout << name << ": " << "(" << areaCode << ") " << prefix << "-" << number << endl;
+				// Comparing the partial results with strSTr
+				const char* result = strStr(lowerCaseFullName, lowerCasePartialName);
 
-					}
+				// If the results are true, then print out the fields above
+				//	Nothing is displayed if no match is found.
+				if (result) {
+					cout << name << ": " << "(" << areaCode << ") " << prefix << "-" << number << endl;
 
 				}
-				//	If the user enters '!' the program exits.
-			} while (strcmp(partialName, "!") != 0);
 
-			//	A thank you message is displayed at the end of the program.
+			}
 
+			//	If the user enters '!' the program exits.
+		} while (strcmp(partialName, "!") != 0);
+
+	}
+
+	void runPhoneDirectory(const char* programTitle, const char* fileName) {
+		FILE* fptr = fopen(fileName, "r");
+
+		if (fptr) {
+			phoneSearch(programTitle, fptr);
 			cout << "Thank you for using " << programTitle << " directory." << endl;
-
 		}
-
-		//	If the data file cannot be opened the program exits displaying an error message
 		else {
-
-			cout << "Broken Phone Book phone direcotry search" << endl; 
-			cout << "-------------------------------------------------------" << endl;
-
-			cout << fileName << " file not found!" << endl;
-
-			cout << "Thank you for using Broken Phone Book directory." << endl;
-
+			brokenPhone(fileName);
 		}
 		fclose(fptr);
 	}

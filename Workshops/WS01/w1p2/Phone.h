@@ -7,10 +7,24 @@
 
 #ifndef SDDS_PHONE_H
 #define SDDS_PHONE_H
+#include <cstdio>
 
+using namespace std;
 namespace sdds {
 	//Prototype for phone module
 	void phoneDir(const char* programTitle, const char* fileName);
+
+	//Output for phone title
+	void phoneTitle(const char* programTitle);
+
+	//Output for broken phone
+	void brokenPhone(const char* fileName);
+
+	//Searching through phone
+	void phoneSearch(const char* programTitle, std::FILE* fptr);
+
+	//Running phone directory
+	void runPhoneDirectory(const char* programTitle, const char* fileName);
 
 }
 
