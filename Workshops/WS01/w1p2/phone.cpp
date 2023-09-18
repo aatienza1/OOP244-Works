@@ -8,8 +8,9 @@
 
 #include <cstdio>
 #include <iostream>
+#include <cstring>
 #include "cStrTools.h"
-#include "phone.h"
+#include "Phone.h"
 
 
 using namespace sdds;
@@ -17,27 +18,27 @@ using namespace std;
 
 namespace sdds {
 	void phoneDir(const char* programTitle, const char* fileName) {
-		const int MAX_STRING = 50;
-		char partialName[MAX_STRING];
+		char partialName[50];
 
 		// Arrays for the area code formatting
 		char name[50];
 		char areaCode[4];
 		char prefix[4];
 		char number[5];
-		char fullName[MAX_STRING];
+		char fullName[50];
 
 		// Comparison Arrays
-		char lowerCaseFullName[MAX_STRING];
-		char lowerCasePartialName[MAX_STRING];
+		char lowerCaseFullName[50];
+		char lowerCasePartialName[50];
 		
-		//	When running, after showing the title, the program should prompt for a partial name entry.
-		cout << "Star Wars phone direcotry search" << endl; cout
-			<< "-------------------------------------------------------" << endl;
-
 		//Checking for file
 		FILE* fptr = fopen(fileName, "r");
 		if (fptr) {
+
+			//	When running, after showing the title, the program should prompt for a partial name entry.
+			cout << programTitle << " phone direcotry search" << endl; cout
+				<< "-------------------------------------------------------" << endl;
+
 			// Do loop to keep partial name entries until exit is entered
 			do {
 				cout << "Enter a partial name to search (no spaces) or enter '!' to exit" << endl;
@@ -49,6 +50,7 @@ namespace sdds {
 				
 				//	After receiving the partial name the program should search through the names 
 				// in the file and if a name is found containing the partial entry, the matching phone record is displayed
+				
 				//This format was taken from the assignment hint, number of fields it needs to find is 4
 				while (fscanf(fptr, "%[^\t]\t%s\t%s\t%s\n", name, areaCode, prefix, number) == 4) {
 
@@ -75,14 +77,24 @@ namespace sdds {
 				}
 				//	If the user enters '!' the program exits.
 			} while (strcmp(partialName, "!") != 0);
+
+			//	A thank you message is displayed at the end of the program.
+
+			cout << "Thank you for using " << programTitle << " directory." << endl;
+
 		}
 
 		//	If the data file cannot be opened the program exits displaying an error message
 		else {
-			cout << fileName << " file not found!" << endl;
-		}
-		//	A thank you message is displayed at the end of the program.
 
-		cout << "Thank you for using " << programTitle << " directory." << endl;
+			cout << "Broken Phone Book phone direcotry search" << endl; 
+			cout << "-------------------------------------------------------" << endl;
+
+			cout << fileName << " file not found!" << endl;
+
+			cout << "Thank you for using Broken Phone Book directory." << endl;
+
+		}
+		fclose(fptr);
 	}
 }

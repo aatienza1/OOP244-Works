@@ -1,0 +1,13 @@
+//Name: Alicia Atienza 
+//Email: aatienza1@myseneca.ca
+//ID: 68789041
+//Date: 9/18/2023
+//I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
+
+While doing workshop 1 part 1, I understood the importance of modular programming, especially when implementing cStrTools into workshop part 2. It did not occur to me that I could re-use my header file for a different program. We had done something similar in our milestone for IPC144, but that felt as if it was one entire project, and it was only for input values. Using the functions for two very different programs (a text file analyzer and a phone directory) made it more evident how important it is to modular programming, because I could separate the functions from the text file analyzer and use them for the phone directory. 
+
+Another thing I had learned while completing this workshop was about inheritance. So many functions in cStrTools had inherited traits from one another, so much so to the point where I was a bit confused in trying to figure out what function I was supposed to use. 
+
+I knew I wanted to compare strings but had to make them all the same case since the file was case sensitive, and I was using toLower. I couldn't figure out why that did not work at all, but then I noticed that toLower converted the singular characters into lowercase, and what I really needed was toLowerCaseAndCopy which went through the ENTIRE word and copied it to a new source.
+
+The biggest issue I had while working on this workshop was comparing the strings and printing them out individually. It took a lot of trial before I was able to print out the related line, as before when I would type "lukE" my code would return the entire phone directory. I'm still having trouble wrapping my head around the use of fscanf, and I'm still surprised that my idea of taking the first field from scanf (the name) and then comparing it to the partial name worked.
