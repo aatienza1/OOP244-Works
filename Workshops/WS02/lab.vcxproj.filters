@@ -34,7 +34,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="movies.dat">
+    <None Include="employees.csv">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

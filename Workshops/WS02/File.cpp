@@ -35,7 +35,7 @@ namespace sdds {
         if (fptr) fclose(fptr);
     }
     //TODO: read functions go here    
-    bool read(char*& name, const char filename[]) {
+    bool read(char*& name) {
         // Local array of 128 characters to read for fscanf
         char localArray[128];
 
@@ -69,7 +69,7 @@ namespace sdds {
     }
 
     // Accepts as a parameter, a reference to an integer representing the employee number
-    bool read(int& employeeNumber, const char filename[]) {
+    bool read(int& employeeNumber) {
         // Variable to store parameter in
         int employeeParam{};
         bool ok = false;
@@ -88,7 +88,7 @@ namespace sdds {
     }
 
     //  Accepts as a parameter, a reference to a double precision number representing the employee's salary
-    bool read(double& employeeSalary, const char filename[]) {
+    bool read(double& employeeSalary) {
 
         // Variable to store parameter in
         double salaryParam{};
