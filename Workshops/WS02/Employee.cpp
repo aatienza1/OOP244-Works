@@ -8,9 +8,14 @@
 //    To be completed by students
 // Revision History
 // -----------------------------------------------------------
-// Name: Alicia Atienza            Date            Reason
+// Name: Alicia Atienza            Date:9/22/2023              Reason
 ***********************************************************************/
+// Student No: 38780274 (Apologies for previous lab, I put my old university student number)
+// Email: aatienza1@myseneca.ca
+//I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
+
 #include <iostream>
+#include <iomanip>
 #include "Employee.h"
 #include "File.h"
 using namespace std;
@@ -56,9 +61,9 @@ namespace sdds {
         // Returns true if the three overloaded functions return as true
         // Calls the three overloaded read functions and sets the three attributes of the Employee
 
-        if (read(employeeNumber) &&
-            read(employeeSalary) &&
-            read(employeeName)) {
+        if (read(employeeNumber, DATAFILE) &&
+            read(employeeSalary, DATAFILE) &&
+            read(employeeName, DATAFILE)) {
 
             emp.m_name = employeeName;
             emp.m_empNo = employeeNumber;
@@ -72,97 +77,92 @@ namespace sdds {
 
         // Returns the combined result of the three read functions
         return ok;
-   }
-   // TODO: Finish the implementation of the 0 arg load function 
-    // Load: an overload of the load function with no parameters
-   bool load() {
-       int i{};
+    }
+    // TODO: Finish the implementation of the 0 arg load function 
+     // Load: an overload of the load function with no parameters
+    bool load() {
+        int i = 0; // Initialize the loop counter
+        bool ok = true; // Initialize ok to true
 
-       char* employeeName{};
-       int employeeNumber{};
-       double employeeSalary{};
+        // If not successful print the following error message and 
+        // exit the function returning false;
+        if (!openFile(DATAFILE)) {
+            cout << "Could not open data file: " << DATAFILE << endl;
+            return false;
+        }
 
-       bool ok = false;
+        // Get the number of records (employees) from the file
+        noOfEmployees = noOfRecords();
 
-       // If not successful print the following error message and 
-       // exit the function returning false;
-       if (!openFile(DATAFILE)) {
+        // Create a dynamically allocated array of Employee
+        employees = new Employee[noOfEmployees];
 
-           cout << "Could not open data file: data_file_name" << endl;
-           return false;
-       }
-       else {
-           ok = true;
-       }
+        // Load each record from the file and store it in the array elements.
+        for (i = 0; i < noOfEmployees; i++) {
+            // Read functions (inputted datafile as second argument, was not working before)
+            if (read(employees[i].m_empNo, DATAFILE) &&
+                read(employees[i].m_salary, DATAFILE) &&
+                read(employees[i].m_name, DATAFILE)) {
+            }
+            else {
 
-       // Get the number of records (employees) from the file (use the function(s) from the File module) 
-       // and store it in the global variable.
-       noOfEmployees = noOfRecords();
+                //Ending program if error!!!
+                ok = false;
+                return ok;
+            }
+        }
+
+        // Displaying error message
+        if (!ok) {
+            cout << "Error: incorrect number of records read; the data is possibly corrupted." << endl;
+
+            // Deallocating memory (NOTE TO SELF USE DELETE[] IF THIS DOES NOT WORK)
+            deallocateMemory(); 
+
+            closeFile(); 
+            return false;
+        }
+
+        // Clean up and close the file
+        closeFile();
+        return true;
+    }
+
+    // TODO: Implementation for the display functions go here
+    void display(const Employee& emp) {
+        int i{};
+        cout << employees[i].m_empNo << ": " << employees[i].m_name
+            << "$" << employees[i].m_salary << endl;
+    }
+
+    void display() {
+        int i{};
+        cout << "Employee Salary report, sorted by employee number" << endl;
+        cout << "no- Empno, Name, Salary" << endl;
+        cout << "------------------------------------------------" << endl;
+
+        sort();
+
+        // NOTE TO SELF: setprecision removes the 0 without casting double to int for the salary
+        // use <iomanip> to do this
+        // YOU MUST ADD FIXED because if you don't it gives you some code
+        for (i = 0; i < noOfEmployees; i++) {
+            cout << i + 1 << "- " << employees[i].m_empNo << ": " << employees[i].m_name
+            << "," << " $" << fixed << setprecision(0) << employees[i].m_salary << endl;
+        }
 
 
-       // Create a dynamically allocated array of Employee to the number of the records 
-       // in the file and hold its address in the corresponding global variable.
-       // NOTE TO SELF: we use Employee because it is it's own object, similar to how one
-       // would say "new int" or "new char" when allocating memory
-       employees = new Employee[noOfEmployees];
+    }
 
-       // Load each record from the file and store it in the array elements.
-       if (ok) {
-           for (i = 0; i < noOfEmployees; i++) {
-               employees[i].m_name = employeeName;
-               employees[i].m_empNo = employeeNumber;
-               employees[i].m_salary = employeeSalary;
+    // TODO: Implementation for the deallocateMemory function goes here
+    void deallocateMemory() {
+        int i{};
 
-           }
-       }
-       // If something goes wrong during data loading, display error message
-       // Deallocate all the memory and return false
-       else {
-           cout << "Error: incorrect number of records read; the data is possibly corrupted." << endl;
-           delete[] employees;
-           return false;
-       }
-
-       // DOUBLE CHECK HERE!!!!!!!!!!! I BET YOU THERE WILL BE A MEMORY LEAK ISSUE AND IT'S HERE <:^)
-       closeFile();
-
-       return ok;
-
-   }
-
-   // TODO: Implementation for the display functions go here
-   void display(const Employee& emp) {
-       int i{};
-           cout << employees[i].m_empNo << ": " << employees[i].m_name
-               << "$" << employees[i].m_salary << endl;
-   }
-
-   void display() {
-       int i{};
-       cout << "Employee Salary report, sorted by employee number" << endl;
-       cout << "no- Empno, Name, Salary" << endl;
-       cout << "------------------------------------------------" << endl;
-
-       sort();
-       
-       // Iterate over the sorted array an print each employee in this format:
-
-       for (i = 0; i < noOfEmployees; i++) {
-           cout << "IDX-" << i << " " << employees[i].m_empNo 
-               << ": " << employees[i].m_name
-               << ", $" << employees[i].m_salary << endl;
-       }
-   }
-
-   // TODO: Implementation for the deallocateMemory function goes here
-   void deallocateMemory() {
-       int i{};
-
-       // Deallocate all the memory used by the the dynamic array of employees
-       for (i = 0; i < noOfEmployees; i++) {
-           delete[] employees;
-       }
-   }
+        // Deallocate all the memory used by the the dynamic array of employees
+        for (i = 0; i < noOfEmployees; i++) {
+            delete[] employees[i].m_name;
+        }
+    }
 
 
 }

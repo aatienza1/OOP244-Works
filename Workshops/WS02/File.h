@@ -8,8 +8,11 @@
 //    To be completed by students
 // Revision History
 // -----------------------------------------------------------
-// Name: Alicia Atienza            Date            Reason
+// Name: Alicia Atienza            Date:9/22/2023              Reason
 ***********************************************************************/
+//I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
+
+
 #ifndef SDDS_FILE_H_
 #define SDDS_FILE_H_
 namespace sdds {
@@ -17,9 +20,9 @@ namespace sdds {
    void closeFile();
    int noOfRecords();
    // TODO: Declare overloaded read function prototypes
-   bool read(char*& name);
-   bool read(int& employeeNumber);
-   bool read(double& employeeSalary);
+   bool read(char*& name, const char filename[]);
+   bool read(int& employeeNumber, const char filename[]);
+   bool read(double& employeeSalary, const char filename[]);
 
 }
 

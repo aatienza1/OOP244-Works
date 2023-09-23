@@ -8,8 +8,13 @@
 //    To be completed by students
 // Revision History
 // -----------------------------------------------------------
-// Name: Alicia Atienza            Date            Reason
+// Name: Alicia Atienza            Date:9/22/2023           Reason
 ***********************************************************************/
+// Student No: 38780274 (Apologies for previous lab, I put my old university student number)
+// Email: aatienza1@myseneca.ca
+//I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
+
+
 #ifndef SDDS_EMPLOYEE_H_
 #define SDDS_EMPLOYEE_H_
 
