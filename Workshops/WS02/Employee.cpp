@@ -162,7 +162,11 @@ namespace sdds {
         for (i = 0; i < noOfEmployees; i++) {
             delete[] employees[i].m_name;
         }
+
+        delete[] employees;
+
+        }
     }
 
 
-}
+

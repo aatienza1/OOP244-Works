@@ -51,7 +51,7 @@ namespace sdds {
         bool ok = false;
 
         // fscanf read of name of employee with return of 1 from localArray
-        if (fscanf(fptr, "%127[^\n]\n", &localArray) == 1) {
+        if (fscanf(fptr, "%127[^\n]\n", localArray) == 1) {
 
             // Calculating length of scanned name 
             length = strlen(localArray);
