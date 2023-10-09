@@ -174,7 +174,6 @@ namespace sdds{
 	bool Train::load(int& input)
 	{
 		int passengers{};
-		int totalPassengers{};
 
 		std::cout << "Enter number of passengers boarding:" << std::endl;
 		std::cout << "> ";
@@ -215,9 +214,10 @@ namespace sdds{
 			return false;
 		}
 	}
-
 	bool Train::transfer(const Train& other)
 	{
+		int leftPassengers = 0;
+
 		// Check if either train is in an invalid state
 		if (this->isInvalid() || other.isInvalid()) {
 			return false;
@@ -229,24 +229,39 @@ namespace sdds{
 			// Allocate memory for the combined name
 			char* combinedName = new char[combinedLength];
 
-			// Copy the name of the current train to the combinedName
+			// Copy the name of the current train to combinedName
 			strcpy(combinedName, this->m_trainName);
 
 			// Append ", " and the second name
 			strcat(combinedName, ", ");
 			strcat(combinedName, other.m_trainName);
 
-			// Deallocate memory for the current train's name
+			// Delete the memory allocated for this->m_trainName
 			delete[] this->m_trainName;
 
 			// Set the new name for the current Train
 			this->m_trainName = combinedName;
 
-			// Update the number of passengers for the current train
-			this->m_noOfPassengers += other.m_noOfPassengers;
+			// Calculate the total number of passengers after the transfer
+			int totalPassengers = this->m_noOfPassengers + other.m_noOfPassengers;
 
-			return true;
+			// Check if the total number of passengers exceeds the maximum limit
+			if (totalPassengers > MAX_NO_OF_PASSENGERS) {
+
+				leftPassengers = totalPassengers - MAX_NO_OF_PASSENGERS;
+
+				this->m_noOfPassengers = MAX_NO_OF_PASSENGERS;
+
+				std::cout << "Train is full; " << leftPassengers << " passengers of " << other.m_trainName << " could not be boarded!" << std::endl;
+				return true;
+			}
+			else {
+				this->m_noOfPassengers = totalPassengers;
+				return true;
+			}
 		}
 	}
+
+
 
 }

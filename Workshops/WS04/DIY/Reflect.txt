@@ -1,0 +1,22 @@
+//I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
+//Alicia Atienza
+//ID: 38782074
+//Email: aatienza1@myseneca.ca
+//Date 10/9/2023
+
+In the Lab I had trouble grasping how an overloaded constructor worked at first. Initially I had 3 constructors for each set of parameter
+but quickly realized that my program wasn't working as intended. I then realized it was because I had not properly set my default parameters,
+and was able to make my program with only 2 constructors.
+
+While working on the DIY, the concept of returning cout was a bit difficult for me to grasp at first. While going over my notes, I noticed 
+we had never returned "cout" itself, but we always returned a parameter instead. I found it pretty interesting that you could return 
+std::cout and the entire formatting you had printed would return. 
+
+I realized the importance of safe states, especially when I was trying to print out my labels. My ostream function was trying to print out
+my label variable when there was nothing input inside of it. Without anything input inside, the function wouldn't be able to tell how much width
+the label would need to be. That's when I went back and set my label variable in my constructors to nullptr, and then created an if statement so the
+cout only printed if there was something inside of the constructor.
+
+I also better understood how to use types from other modules. When I was dynamically allocating memory for one of my variables, it said that I needed 
+a "type" and I couldn't understand why my "LabelMaker" didn't qualify as a type. Then I noticed that "LabelMaker" had no constructors, so I learned that
+I would need to use the "Label" as a type since that already had constructors. 

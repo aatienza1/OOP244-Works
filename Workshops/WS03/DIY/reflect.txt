@@ -1,0 +1,25 @@
+Alicia Atienza
+Student ID: 38782074
+Email: aatienza1@myseneca.ca
+Date: 10/2/2023
+//I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
+
+My transfer function was copied by Kathlyn Lacuata.
+
+I had quite a few hurdles during this workshop, the first was with boarding the passengeres with the load.
+My main issue was there was no indication on the output that we were boarding people
+on to a specific train that already had passengers loaded. You had to read the main.cpp and understand 
+that the passengers were being loaded on to train A. What would happen was I would load 
+the passengers on to the train but I since there was no train name in the output, I had assumed it was just any train.
+
+My second hurdle was creating the "set" function with the three arguments. I couldn't understand why one of the trains wasn't having it's
+name set, until I realized I didn't cover enough possibilities and was invalidating everything under only one circumstance. For example,
+I didn't have a safe empty state for when only time was given, I didn't have a safe empty state where the name and the passengers were given, etc. 
+There I learned that a safe empty state had to account for every possible scenario.
+
+Finally the biggest hurdle was comprehending the transfer function. At first I couldn't understand how we were getting the name of the "to" train and comparing it
+to the other train, until I recognized that since these were all under one class, I could still access them.
+I used "this->" for more readability and so that I would guarantee that the train being called was the one inside of the class, however I do recall that
+therhe are certain scenarios that you shouldn't use "this->" for like, if the argument has the same name as a variable inside of the function. However I do not
+believe this is one of those scenarios.
+

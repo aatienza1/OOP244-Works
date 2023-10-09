@@ -1,8 +1,0 @@
-Alicia Atienza
-Student ID: 38782074
-Email: aatienza1@myseneca.ca
-Date: 10/2/2023
-//I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
-
-
-One of my biggest hurdles in this assignment was using the this-> operator. When I looked at the transfer function in main.cpp and I saw that the syntax was written as "!to.transfer(from)" I understood that I had to some how get the name of both trains into a function that only accepts one parameter. That's when I realized I could use the "this->" syntax which we learned from class, to say "here", as in "THIS was the train I want to use the name for". I kept getting memory leak errors while using the "transfer" function and it took a while for me to properly deallocate the memory of m_trainName within a class. My main issue is I had trouble understanding when to de-allocate the memory. I was de-allocating memory to the variable called "combinedName" when I should have been de-allocating memory to the variable that I was copying the name over to, "this->m_trainName".
