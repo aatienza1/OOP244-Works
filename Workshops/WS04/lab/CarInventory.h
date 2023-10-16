@@ -26,8 +26,8 @@ namespace sdds {
 		bool isValid() const;
 		bool isSimilarTo(const CarInventory& car) const;
 	};
-	
-int find_similar(CarInventory car[], const int num_cars);
+
+	int find_similar(CarInventory car[], const int num_cars);
 }
 
 #endif // SDDS_CAR_INVENTORY_H

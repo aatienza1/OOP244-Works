@@ -7,10 +7,12 @@
 #include <cstring>
 #include <iostream>
 #include "Train.h"
-#include "Train.h"
+#define MIN_TIME 700
+#define MAX_TIME 2300
+#define MAX_NO_OF_PASSENGERS 1000
 
 using namespace sdds;
-namespace sdds{
+namespace sdds {
 	void Train::initialize() {
 		m_trainName = nullptr;
 		m_noOfPassengers = -1;
@@ -43,16 +45,16 @@ namespace sdds{
 	void Train::set(const char* name) {
 		delete[] m_trainName;
 		m_trainName = nullptr;
-		
+
 		// Checking that name is not null and not an empty stringretu
-		if (name != nullptr && name[0] != '\0' ) {
+		if (name != nullptr && name[0] != '\0') {
 
 			// Allocating memory for the new train name
 			int length = strlen(name);
 			m_trainName = new char[length + 1];
-			strcpy(m_trainName,name);
+			strcpy(m_trainName, name);
 		}
-		
+
 	}
 	void Train::set(int noOfPassengers, int departure)
 	{
@@ -118,10 +120,6 @@ namespace sdds{
 		if (!isInvalid()) return m_departTime;
 		return -1;
 	}
-	bool Train::load(int& input)
-	{
-		return false;
-	}
 	void Train::display() const
 	{
 		// If invalid is false, display
@@ -135,22 +133,4 @@ namespace sdds{
 			std::cout << "Train in an invalid State!" << std::endl;
 		}
 	}
-	bool Train::updateDepartureTime()
-	{
-		return false;
-	}
-	bool Train::transfer(char* transferName) const
-	{
-		return false;
-	}
-	bool Train::transfer(const Train& other) const
-	{
-		return false;
-	}
-	bool Train::getDepartureTime(int& time)
-	{
-		return false;
-	}
-	
-
 }

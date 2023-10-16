@@ -40,43 +40,36 @@ namespace sdds {
 	// Destructor
 	CarInventory::~CarInventory()
 	{
-
+		delete[] m_type;
+		delete[] m_brand;
+		delete[] m_model;
 		resetInfo();
 	}
 
 	// Setting dynamic info
 	CarInventory& CarInventory::setInfo(const char* type, const char* brand, const char* model, int year, int code, double price)
 	{
+		// Deallocate the old memory if it was previously allocated
+		delete[] m_type;
+		delete[] m_brand;
+		delete[] m_model;
+
 		// Allocate new memory and copy data
-		char* tempType = new char[strlen(type) + 1];
-		strcpy(tempType, type);
+		int length = strlen(type);
+		m_type = new char[length + 1];
+		strcpy(m_type, type);
 
-		std::cout << tempType << "This is proving something is inside tempType" << std::endl;
+		length = strlen(brand);
+		m_brand = new char[length + 1];
+		strcpy(m_brand, brand);
 
-		std::cout << m_type;
-
-		strcpy(m_type, tempType);
-
-		std::cout << m_type << "This is the new memory" << std::endl;
-
-		//char* tempBrand = new char[strlen(brand) + 1];
-		//strcpy(tempBrand, brand);
-
-		//char* tempModel = new char[strlen(model) + 1];
-		//strcpy(tempModel, model);
+		length = strlen(model);
+		m_model = new char[length + 1];
+		strcpy(m_model, model);
 
 		m_year = year;
 		m_code = code;
 		m_price = price;
-
-		//strcpy(m_type, tempType);
-		//strcpy(m_brand, tempBrand);
-		//strcpy(m_model, tempModel);
-
-		//delete[] tempType;
-		//delete[] tempBrand;
-		//delete[] tempModel;
-
 
 		return *this;
 	}

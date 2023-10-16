@@ -1,0 +1,21 @@
+// Name: Alicia Atienza                 Date: 10/14/2023            Reason
+// ID: 38782074
+// Email: aatienza1@myseneca.ca
+// I have done all the coding by myself and only copied the code that my professor
+// provided to complete my workshops and assignments.
+***********************************************************************/
+
+A difficult part of the lab for me was figuring out how to use a helper function. 
+I did not want to use a friend, as I didn't want to give that function control over
+the others. After I wrote the function I had said to myself, "that's it?" because
+it seemed so simple and I commonly would over complicate the nature of it.
+
+My biggest problem with both the lab and the DIY was overloading the >> and << operator.
+It's a bit of a hard concept to understand, because I am not used to using those
+operators for math equations. I found myself looking at the main.cpp a lot more than
+usual to see if I was getting the correct results.
+
+Another difficulty I had was the idea of "setting to empty" with the << and >> operator.
+I could not figure out why the const and the const char* were not changing in the display. To my understanding, "setting to empty" meant setting the m_value of the Portfolio to 0, to zero, so I would only have to modify that value. It was then that I realized that I had to set the "Portfolio" object itself to empty by using emptyPortfolio();. 
+
+I did however enjoy this workshop because it was easier for me to trace the issues with the operators over dynamic memory allocation.
