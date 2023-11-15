@@ -1,0 +1,23 @@
+// Name: Alicia Atienza                 Date: 11/3/2023            Reason
+// ID: 38782074
+// Email: aatienza1@myseneca.ca
+// I have done all the coding by myself and only copied the code that my professor
+// provided to complete my workshops and assignments.
+***********************************************************************/
+
+A difficult part of the lab and the reason why my lab took much longer to complete than
+it should have was the use of peek(). I used peek the way it was shown to us in the example, (creating a character called next, and when I used extractChar function for the input, it was working. However when I was trying to output the file, it wouldn't output correctly until I used istr.peek. 
+
+The code also wasn't displaying for the longest time, because I had to extract a new line after extracting the control number to local variable. This was kind of confusing because the github instructions didn't specifically say to extract this new line. Another issue was I had use istr.ignore in between getting the extractChar and once again, nothing was showing on the screen.
+
+One thing that I learned while doing this workshop was that I could have a default constructor by setting the default for all four values. I found that interesting and it also looks neater. I took this concept and re-used for both Data and Status in milestone 1.
+
+Another thing I found interesting was having a boolean as a parameter. At first I didn't understand why in ostream overload we were setting .print as false, until I noticed that it was defaulted in the ostream&print as true which is why we set it to false when having hc use .print.
+
+With Milestone 1, one of the difficulties I had was figuring out the type conversion overloads. At first the type of casting I had did was operator int() const; but after attempting to run my code I noticed the errors specifically stated there was no operand that took the type 'int' and realized I needed to make an = overload.
+
+One other difficulty I also had was the concept of a helper insertion overload. I created the insertion operator overload, but I had a difficult time figuring out how to make the helper. I ended up creating a print function.
+
+I found the Utils function very helpful when using the Date module and using getSystemDate was very interesting. I knew I had to use it but I wasn't sure how getSystemDate would accept the arguments of the year. I then realized I would have to use a reference int to store the current year data.
+
+Another big issue I had was figuring how to state the date value was invalid. At first I tried using !isdigit but that did not help. I then tried using isalpha() and I started getting the desired messages but it still wasn't printing out the "Invalid Date Value" message. Finally I realized I would have to create an extra boolean to check if the date was valid.

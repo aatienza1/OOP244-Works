@@ -1,0 +1,9 @@
+// Name: Alicia Atienza                 Date: 11/3/2023            Reason
+// ID: 38782074
+// Email: aatienza1@myseneca.ca
+// I have done all the coding by myself and only copied the code that my professor
+// provided to complete my workshops and assignments.
+***********************************************************************/
+
+A difficult part of the lab and the reason why my lab took much longer to complete than
+it should have was the use of peek().

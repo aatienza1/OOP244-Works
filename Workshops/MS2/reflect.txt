@@ -1,0 +1,21 @@
+// -----------------------------------------------------------
+// Name: Alicia Atienza                 Date: 11/14/2023            email: aatienza1@myseneca.ca
+***********************************************************************/
+
+While doing workshop 7 I found the concept of virtuality to be intersting. A lot of my errors were solved
+simply by putting the word "virtual" in front of the header function. The hardest part of the workshop was
+the math -- I'm not that strong at math.
+
+For the milestone, while working on the AidMan module I found myself revisiting the Menu module a lot. I had an
+issue where one of my functions in AidMan wasn't accepting a certain string, and I had to go back into Menu and 
+add a default constructor, as well as go back into AidMan and change the way that constructor was as well.
+
+I also found myself going back and fixing the getint function I had created from milestone 1. Since the function wasn't 
+used, I found that I had not properly tested it. That was also something that affected me during milestone 1, as since it
+was suggested to create a getint function I assumed we would be using it during that milestone.
+
+I also had an error when trying to copy the filename into my m_filename attributed, and had to
+create a separate function that would return the name to get around that.
+
+Despite the math, I enjoyed the simplicity of workshop 7 however with milestone 2 I found myself constantly going backwards
+and correcting things I had already written.
