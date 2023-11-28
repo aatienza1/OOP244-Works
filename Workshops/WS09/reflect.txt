@@ -1,0 +1,18 @@
+Student Name: Alicia Atienza
+ID: 38782074
+Email: aatienza1@myseneca.ca
+I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
+
+Workshop 9 seemed relatively simple. I did complete it in a quick fashion, 
+however the only notable issue I had was that I had issues with the parameterized constructor of the graduate class. 
+I didn't understand that even though I was using the constructor of the parent class, 
+I still had to add the parameters of the parent class into the derived class. For example, I was writing my Graduate constructor as the following:
+
+Graduate::Graduate(const char* thesis, const char* supervisor) :Student(name,age)
+
+However I didn't understand that even though I was passing the paraeters to the parent class, that meant I had to get the parameters in the derived class' constructor.
+The correct way to write it was:
+
+Graduate::Graduate(const char* name, int age, const char* thesis, const char* supervisor) :Student(name,age)
+
+Using Student::display(); felt a little unfamiliar and odd. I was stuck on this part of code for a bit because I was trying to use the private attribute from the Student class, and then realized I couldn't do that.
