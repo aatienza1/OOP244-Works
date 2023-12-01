@@ -55,12 +55,17 @@ namespace sdds {
 			}
 			ostr << '\t';
 			ostr << m_expiryDate;
+
 		}
 		return ostr;
 	}
 
 	std::ifstream& Perishable::load(std::ifstream& ifstr) {
 		Item::load(ifstr);
+
+		// Delete instructions for those that have null
+		delete[] m_instructions;
+		m_instructions = nullptr;
 
 		if (ifstr.fail()) {
 			m_state = "Input file stream read (perishable) failed!";
@@ -72,7 +77,6 @@ namespace sdds {
 		if (ifstr.getline(tempInstructions, 1000, '\t') && isalpha(tempInstructions[0])) {
 			ut.alocpy(m_instructions, tempInstructions);
 		}
-
 		ifstr >> m_expiryDate;
 		ifstr.ignore();
 
@@ -82,14 +86,17 @@ namespace sdds {
 
 	std::ostream& Perishable::display(std::ostream& ostr) const
 	{
+
 		if (!m_expiryDate.state()) {
 			ostr << m_expiryDate;
+			//ostr << const_cast<Date&>(expiry()).formatted(true);
+
 		}
 		else {
 			if (isLinear()) {
 				Item::display(ostr);
 
-				if (m_instructions != nullptr) {
+				if (m_instructions != nullptr && m_instructions[0] != '\0') {
 					ostr << "*";
 				}
 				else {
@@ -103,8 +110,7 @@ namespace sdds {
 				ostr << "Expiry date: ";
 
 				// cast out of const in order to format
-				ostr << const_cast<Date&>(expiry()).formatted(true);
-
+				ostr << m_expiryDate;
 				// Handling instructions
 				if (m_instructions != nullptr && m_instructions[0] != '\0') {
 					ostr << "\nHandling Instructions: " << m_instructions << '\n';
@@ -114,7 +120,6 @@ namespace sdds {
 				}
 			}
 		}
-
 		return ostr;
 	}
 
@@ -131,7 +136,11 @@ namespace sdds {
 
 		std::cout << "Expiry date (YYMMDD): ";
 		m_expiryDate.read(istr);
+
+		// Cast to false for read to properly input 
+		//const_cast<Date&>(expiry()).formatted(false);
 		istr.ignore(1000, '\n');
+
 
 		std::cout << "Handling Instructions, ENTER to skip: ";
 		if (istr.peek() != '\n') {
