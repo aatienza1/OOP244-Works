@@ -107,8 +107,12 @@ namespace sdds {
 	}
 	 Date& Date::formatted(bool value)
 	{
+
 		if (value == false) {
 			m_format = false;
+		}
+		else {
+			m_format = true;
 		}
 		return *this;
 	}

@@ -2,10 +2,11 @@
 // Final project Milestone 3
 // Module: item
 // File: Item.cpp
-// Version 1.0
+// Version 1.0=1
 // Description
 // Concrete class derived from iProduct
 // Revision History
+// Changed copy assignment to copy m_sku
 -----------------------------------------------------------
 I have done all the coding by myself and only copied the code
 that my professor provided to complete my workshops and assignments.
@@ -44,6 +45,7 @@ namespace sdds {
 			m_quantity = other.m_quantity;
 			m_neededQuantity = other.m_neededQuantity;
 			m_linear = other.m_linear;
+			m_sku = other.m_sku;
 			m_state = other.m_state;
 		}
 		else {
@@ -69,7 +71,7 @@ namespace sdds {
 	}
 	Item::operator bool() const
 	{
-		return !(m_state && m_sku > 0);
+		return (m_state && m_sku > 0);
 	}
 	int Item::operator-=(int quantity)
 	{

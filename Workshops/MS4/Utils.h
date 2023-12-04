@@ -32,6 +32,7 @@ namespace sdds {
         // Getting doubles
         double getdouble(const char* prompt = nullptr);
         double getdouble(double min, double max, const char* prompt = nullptr, const char* errMes = nullptr);
+
     };
     extern Utils ut;
 }

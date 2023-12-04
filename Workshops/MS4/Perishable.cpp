@@ -54,7 +54,9 @@ namespace sdds {
 				ostr << m_instructions;
 			}
 			ostr << '\t';
+			const_cast<Date&>(expiry()).formatted(false);
 			ostr << m_expiryDate;
+			const_cast<Date&>(expiry()).formatted(true);
 
 		}
 		return ostr;
