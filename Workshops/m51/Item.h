@@ -58,6 +58,7 @@ namespace sdds {
 
 		// Virtual input/output method iProduct overrides
 		virtual std::ofstream& save(std::ofstream& ostr)const;
+		virtual std::ofstream& savePerishable(std::ofstream& ostr)const;
 		virtual std::ifstream& load(std::ifstream& istr);
 		virtual std::ostream& display(std::ostream& ostr = cout)const;
 		virtual int readSku(std::istream& istr = cin);

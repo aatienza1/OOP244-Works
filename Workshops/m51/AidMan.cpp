@@ -376,7 +376,7 @@ namespace sdds {
 			if (search(removeSku) == -1) {
 				cout << "SKU Not Found!" << endl;
 			}
-			// <:^O you want to remove the sku?
+			// remove sku
 			else if (search(removeSku) != 1) {
 				int selection{};
 
@@ -386,7 +386,7 @@ namespace sdds {
 				cout << "1- Yes!" << endl;
 				cout << "0- Exit" << endl;
 
-				// YESSIR
+				// select sku to be removed
 				selection = ut.getint(0, 1, "> ");
 				if (selection == 1) {
 					remove(search(removeSku));

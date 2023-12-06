@@ -57,23 +57,22 @@ namespace sdds {
 		return m_expiryDate;
 	}
 
-	std::ofstream& Perishable::save(std::ofstream& ostr) const
-	{
-		if (m_expiryDate.state()) {
-			Item::save(ostr);
-			ostr << '\t';
-			if (m_instructions != nullptr) {
-				ostr << m_instructions;
-			}
-			ostr << '\t';
-			const_cast<Date&>(expiry()).formatted(false);
-			ostr << m_expiryDate;
-			ostr << std::endl;
-			const_cast<Date&>(expiry()).formatted(true);
+std::ofstream& Perishable::save(std::ofstream& ostr) const
+    {
+        if (m_expiryDate.state()) {
+            Item::savePerishable(ostr);
+            if (m_instructions != nullptr) {
+                ostr << m_instructions;
+            }
+            ostr << '\t';
+            const_cast<Date&>(expiry()).formatted(false);
+            ostr << m_expiryDate;
+            const_cast<Date&>(expiry()).formatted(true);
+			ostr << endl;
 
-		}
-		return ostr;
-	}
+        }
+        return ostr;
+    }
 
 	std::ifstream& Perishable::load(std::ifstream& ifstr) {
 		Item::load(ifstr);

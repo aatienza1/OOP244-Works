@@ -124,7 +124,18 @@ namespace sdds {
 	std::ofstream& Item::save(std::ofstream& ostr) const
 	{
 		if (m_state) {
-			ostr << '\n' << m_sku << '\t' << m_description << '\t' << m_quantity << '\t' << m_neededQuantity << '\t' << m_price;
+			ostr << m_sku << '\t' << m_description << '\t' << m_quantity << '\t' << m_neededQuantity << '\t' << m_price << endl;
+		}
+		else {
+			ostr.setstate(std::ios::failbit);
+		}
+		return ostr;
+	}
+
+	std::ofstream& Item::savePerishable(std::ofstream& ostr) const
+	{
+		if (m_state) {
+			ostr << m_sku << '\t' << m_description << '\t' << m_quantity << '\t' << m_neededQuantity << '\t' << m_price << '\t';
 		}
 		else {
 			ostr.setstate(std::ios::failbit);
