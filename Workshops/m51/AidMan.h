@@ -73,6 +73,15 @@ namespace sdds {
 		// Menu item 3
 		AidMan& remove(int index);
 		AidMan& RemoveItem();
+
+		// Menu item 4
+		AidMan& UpdateItem();
+
+		// Menu item 5
+		AidMan& Sort();
+
+		// Menu item 6
+		//AidMan& ShipItems();
 	};
 
 }

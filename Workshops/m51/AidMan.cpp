@@ -16,7 +16,6 @@ that my professor provided to complete my workshops and assignments.
 // -----------------------------------------------------------
 // Name: Alicia Atienza                 Date: 11/14/2023            email: aatienza1@myseneca.ca
 ***********************************************************************/
-
 #include <iostream>
 #include <fstream>
 #include <string.h>
@@ -126,18 +125,21 @@ namespace sdds {
 
 				cout << endl;
 				cout << "****Update Quantity****" << endl;
+				UpdateItem();
 				cout << endl;
 				break;
 			case 5:
 
 				cout << endl;
 				cout << "****Sort****" << endl;
+				Sort();
 				cout << endl;
 				break;
 			case 6:
 
 				cout << endl;
 				cout << "****Ship Items****" << endl;
+				//ShipItems();
 				cout << endl;
 
 				break;
@@ -317,6 +319,12 @@ namespace sdds {
 			cout << "-----------------" << endl;
 			cout << "0- Exit" << endl;
 			selection = ut.getint(0, 2, "> ");
+			// add nullptr check
+
+			if (m_iprodPointer[m_noOfItems] != nullptr) {
+				delete[]m_iprodPointer[m_noOfItems];
+				m_iprodPointer[m_noOfItems] = nullptr;
+			}
 			if (selection == 0) {
 				cout << "Aborted" << endl << endl;
 			}
@@ -325,6 +333,7 @@ namespace sdds {
 			}
 			else if (selection == 2) {
 				m_iprodPointer[m_noOfItems] = new Item;
+				// memory error is here, issues de-allocating when item fails
 			}
 
 			if (m_iprodPointer[m_noOfItems]) {
@@ -337,13 +346,12 @@ namespace sdds {
 					if (*m_iprodPointer[m_noOfItems]) {
 						m_noOfItems++;
 					}
-					else if (search(tempSku) != -1){
-						// Delete item if it doesn't meet certain conditions
-						delete m_iprodPointer[m_noOfItems];
-					}
 				}
-				else {
+				else{
+					// Delete item if it doesn't meet certain conditions
+					delete m_iprodPointer[m_noOfItems];
 					cout << "Sku: " << tempSku << " is already in the system, try updating quantity instead.\n";
+
 				}
 			}
 		}
@@ -400,6 +408,113 @@ namespace sdds {
 
 		return *this;
 	}
+	AidMan& AidMan::UpdateItem()
+	{
+		// Using similar logic as adding an item to find the item
+		char tempDesc[150]{};
+		cout << "Item description: ";
+		cin >> tempDesc;
+
+		// get the list
+		int skuMatch = list(tempDesc);
+
+		if (skuMatch != -1) {
+			int updateQuantity = ut.getint(10000, 99999, "Enter SKU: ");
+			int updateIndex = search(updateQuantity);
+
+			if (updateIndex == -1) {
+				cout << "SKU Not Found!" << endl;
+			}
+			else {
+				// using querys
+				int qNeeded = m_iprodPointer[updateIndex]->qtyNeeded();
+				int qOnHand = m_iprodPointer[updateIndex]->qty();
+
+				int selection{};
+				cout << "1- Add" << endl;
+				cout << "2- Reduce" << endl;
+				cout << "0- Exit" << endl;
+				selection = ut.getint(0, 2, "> ");
+
+				if (selection == 1) {
+					if ((qNeeded - qOnHand) <= 0) {
+						cout << "Quantity Needed already fulfilled!" << endl;
+					}
+					else {
+						int toAdd = ut.getint(1, qNeeded - qOnHand, "Quantity to add: ");
+						*m_iprodPointer[updateIndex] += toAdd;
+						cout << toAdd << " items added!" << endl;
+					}
+				}
+				else if (selection == 2) {
+					if (qOnHand == 0) {
+						cout << "Quantity on hand is zero!" << endl;
+					}
+					else {
+						int toRemove = ut.getint(1, qOnHand, "Quantity to reduce: ");
+						*m_iprodPointer[updateIndex] -= toRemove;
+						cout << toRemove << " items removed!" << endl;
+					}
+				}
+				else if (selection == 0) {
+					cout << "Aborted!" << endl;
+				}
+			}
+		}
+		else {
+			cout << "No items match this description." << endl;
+		}
+
+		return *this;
+	}
+
+	AidMan& AidMan::Sort()
+	{
+		// declared outside of loop to be used later
+		int i, j;
+		for (i = 0; i < m_noOfItems; i++) {
+			int qNeeded = m_iprodPointer[i]->qtyNeeded();
+			int qOnHand = m_iprodPointer[i]->qty();
+			int difference = qOnHand - qNeeded;
+
+			// next item for comparison
+			for (j = 0; j < m_noOfItems; i++) {
+				int qNeeded2 = m_iprodPointer[j]->qtyNeeded();
+				int qOnHand2 = m_iprodPointer[j]->qty();
+				int difference2 = qOnHand2 - qNeeded2;
+
+				if (difference < difference2) {
+					iProduct* tempProduct{};
+					tempProduct = m_iprodPointer[i];
+					m_iprodPointer[i] = m_iprodPointer[j];
+					m_iprodPointer[j] = tempProduct;
+
+				}
+			}
+		}
+		cout << "Sort Completed!\n" << endl;
+		return *this;
+	}
+	//AidMan& AidMan::ShipItems()
+	//{
+	//	int shippedItems{};
+	//	Date currentDate{};
+
+	//	// shipping the items
+	//	ofstream shippingFile("shippingOrder.txt");
+
+	//	// putting it into the ofstream file
+	//	shippingFile << "Shipping Order, Date: " << current << "\n";
+	//	shippingFile << " ROW |  SKU  | Description                         | Have | Need |  Price  | Expiry";
+	//	shippingFile << "-----+-------+-------------------------------------+------+------+---------+-----------";
+
+	//	// code for the rest of the loop of going through
+
+	//	cout << "-----+-------+-------------------------------------+------+------+---------+-----------";
+
+	//	cout << "Shipping Order for 999times saved!";
+	//	return *this;
+	//}
 	}
 
 
